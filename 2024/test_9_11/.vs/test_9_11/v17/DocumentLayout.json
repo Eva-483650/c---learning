@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\code\\2024\\test_9_11\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C699E490-2BE8-44EC-B8B7-0910C0D56AB9}|test_9_11\\test_9_11.vcxproj|D:\\code\\2024\\test_9_11\\test_9_11\\test.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C699E490-2BE8-44EC-B8B7-0910C0D56AB9}|test_9_11\\test_9_11.vcxproj|solutionrelative:test_9_11\\test.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C699E490-2BE8-44EC-B8B7-0910C0D56AB9}|test_9_11\\test_9_11.vcxproj|D:\\code\\2024\\test_9_11\\test_9_11\\test2.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C699E490-2BE8-44EC-B8B7-0910C0D56AB9}|test_9_11\\test_9_11.vcxproj|solutionrelative:test_9_11\\test2.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "test2.c",
+              "DocumentMoniker": "D:\\code\\2024\\test_9_11\\test_9_11\\test2.c",
+              "RelativeDocumentMoniker": "test_9_11\\test2.c",
+              "ToolTip": "D:\\code\\2024\\test_9_11\\test_9_11\\test2.c",
+              "RelativeToolTip": "test_9_11\\test2.c",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2024-09-11T15:26:48.979Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "test.c",
+              "DocumentMoniker": "D:\\code\\2024\\test_9_11\\test_9_11\\test.c",
+              "RelativeDocumentMoniker": "test_9_11\\test.c",
+              "ToolTip": "D:\\code\\2024\\test_9_11\\test_9_11\\test.c",
+              "RelativeToolTip": "test_9_11\\test.c",
+              "ViewState": "AQIAABsAAAAAAAAAAAAAACUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2024-09-11T13:25:44.82Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

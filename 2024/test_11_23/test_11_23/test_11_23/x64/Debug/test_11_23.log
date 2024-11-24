@@ -1,0 +1,4 @@
+﻿  test.c
+D:\code\2024\test_11_23\test_11_23\test.c(201,10): warning C4013: “strlen”未定义；假设外部返回 int
+D:\code\2024\test_11_23\test_11_23\test.c(226,2): warning C4013: “gets”未定义；假设外部返回 int
+  test_11_23.vcxproj -> D:\code\2024\test_11_23\test_11_23\x64\Debug\test_11_23.exe
