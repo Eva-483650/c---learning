@@ -1,2 +1,5 @@
 ﻿  test.c
+D:\code\c---learning\2024\test_12_1\test_12_1\test.c(101,8): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\code\c---learning\2024\test_12_1\test_12_1\test.c(102,8): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\code\c---learning\2024\test_12_1\test_12_1\test.c(103,8): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
   test_12_1.vcxproj -> D:\code\c---learning\2024\test_12_1\x64\Debug\test_12_1.exe
