@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\code\\c-learning\\test_12_2\\",
+  "WorkspaceRootPath": "D:\\code\\c---learning\\2024\\test_12_2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{74F2934A-61A5-49FB-B2F9-4937C99871D2}|test_12_2\\test_12_2.vcxproj|D:\\code\\c-learning\\test_12_2\\test_12_2\\test.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{74F2934A-61A5-49FB-B2F9-4937C99871D2}|test_12_2\\test_12_2.vcxproj|D:\\code\\c---learning\\2024\\test_12_2\\test_12_2\\test.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{74F2934A-61A5-49FB-B2F9-4937C99871D2}|test_12_2\\test_12_2.vcxproj|solutionrelative:test_12_2\\test.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
@@ -32,11 +32,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "test.c",
-              "DocumentMoniker": "D:\\code\\c-learning\\test_12_2\\test_12_2\\test.c",
+              "DocumentMoniker": "D:\\code\\c---learning\\2024\\test_12_2\\test_12_2\\test.c",
               "RelativeDocumentMoniker": "test_12_2\\test.c",
-              "ToolTip": "D:\\code\\c-learning\\test_12_2\\test_12_2\\test.c",
+              "ToolTip": "D:\\code\\c---learning\\2024\\test_12_2\\test_12_2\\test.c",
               "RelativeToolTip": "test_12_2\\test.c",
-              "ViewState": "AgIAAMMAAAAAAAAAAAAkwNIAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAKsAAAAAAAAAAAAkwNIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
               "WhenOpened": "2024-12-02T02:06:15.897Z",
               "EditorCaption": ""
