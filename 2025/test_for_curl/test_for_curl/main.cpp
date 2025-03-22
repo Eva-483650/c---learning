@@ -4,7 +4,7 @@
 #include <string.h>
 #include <curl/curl.h>
 #include <json-c/json.h>
-#include <windows.h>
+//#include <windows.h>
 #define KEY       "a5a0b276466e253c0ab0ea5ed527fdeb"  // 这里填入你的Key
 #define SIZE       512   // URL大小
 #define STR        4096  // 字符串大小  
@@ -20,6 +20,51 @@ typedef struct POIInfo {
     char type[STR];
     struct POIInfo* next;
 } POIInfo;
+
+// 将多字节字符串转换为 UTF-8
+char* ConvertToUTF8(const char* input)
+{
+    // Step 1: 多字节（GBK）→ 宽字符（UTF-16）
+    int wc_len = MultiByteToWideChar(CP_ACP, 0, input, -1, NULL, 0);
+    wchar_t* wstr = (wchar_t*)malloc(wc_len * sizeof(wchar_t));
+    MultiByteToWideChar(CP_ACP, 0, input, -1, wstr, wc_len);
+
+    // Step 2: 宽字符（UTF-16）→ UTF-8
+    int utf8_len = WideCharToMultiByte(CP_UTF8, 0, wstr, -1, NULL, 0, NULL, NULL);
+    char* utf8_str = (char*)malloc(utf8_len);
+    WideCharToMultiByte(CP_UTF8, 0, wstr, -1, utf8_str, utf8_len, NULL, NULL);
+
+    free(wstr);
+    return utf8_str;
+}
+
+// 将UTF-8转换为多字节字符串
+char* ConvertToGBK(const char* utf8_str)
+{
+    if (!utf8_str || *utf8_str == '\0')
+    {
+        char* empty = (char*)malloc(1);
+        *empty = '\0';
+        return empty;
+    }
+
+    // Step 1: UTF-8 → UTF-16
+    int wlen = MultiByteToWideChar(CP_UTF8, 0, utf8_str, -1, NULL, 0);
+    wchar_t* wstr = (wchar_t*)malloc(wlen * sizeof(wchar_t));
+    MultiByteToWideChar(CP_UTF8, 0, utf8_str, -1, wstr, wlen);
+
+    // Step 2: UTF-16 → GBK
+    int glen = WideCharToMultiByte(CP_ACP, 0, wstr, -1, NULL, 0, NULL, NULL);
+    char* gbk_str = (char*)malloc(glen);
+    WideCharToMultiByte(CP_ACP, 0, wstr, -1, gbk_str, glen, NULL, NULL);
+    free(wstr);
+    if (!gbk_str)
+    {
+        fprintf(stderr, "GBK转换失败: %s\n", utf8_str);
+        return _strdup(""); // 返回空字符串避免崩溃
+    }
+    return gbk_str; // 需要调用者释放内存
+}
 
 // 创建新节点（改为返回节点指针）
 POIInfo* CreatePOINode() 
@@ -73,14 +118,16 @@ size_t got_data(char* buffer, size_t size, size_t nmemb, void* userp)
 }
 
 // 解析JSON并填充链表（通过参数传递链表头）
-void ParsePOIData(json_object* json, POIInfo** head) {
+void ParsePOIData(json_object* json, POIInfo** head) 
+{
     if (!json || !head) return;
 
     struct json_object* pois;
     if (!json_object_object_get_ex(json, "pois", &pois)) return;
 
     int len = json_object_array_length(pois);
-    for (int i = 0; i < len; i++) {
+    for (int i = 0; i < len; i++) 
+    {
         POIInfo* node = CreatePOINode();
         if (!node) continue;
 
@@ -90,8 +137,11 @@ void ParsePOIData(json_object* json, POIInfo** head) {
         // 使用安全拷贝函数
         #define SAFE_COPY(field_name, target) do { \
             if (json_object_object_get_ex(poi, field_name, &field)) { \
-                strncpy(target, json_object_get_string(field), STR-1); \
+                const char* utf8_value = json_object_get_string(field); \
+                char* gbk_value = ConvertToGBK(utf8_value); \
+                strncpy(target, gbk_value, STR-1); \
                 target[STR-1] = '\0'; \
+                free(gbk_value); \
             } \
         } while(0)
 
@@ -111,20 +161,23 @@ void ParsePOIData(json_object* json, POIInfo** head) {
 void PrintLinkedList(const POIInfo* head) 
 {
     int i = 0;
+	printf("=====================================\n");
     for (const POIInfo* current = head; current != NULL; current = current->next) 
     {
         i++;
         printf("[POI %d]\n"
-            "Name: %s\n"
-            "Address: %s\n"
-            "Location: %s\n"
-            "Province: %s\n"
-            "City: %s\n"
-            "District: %s\n"
-            "Type: %s\n\n"
+            "名称: %s\n"
+            "详细地址: %s\n"
+            "经纬度: %s\n"
+            "所属省份: %s\n"
+            "所属城市: %s\n"
+            "所属区县: %s\n"
+            "所属类型: %s\n\n"
             ,i,current->name, current->address, current->location,
             current->province, current->city, current->district, current->type);
     }
+    printf("=====================================\n");
+
 }
 
 // 释放链表（通过双重指针确保头指针置空）
@@ -199,35 +252,20 @@ POIInfo* FindPOI(const POIInfo* head, const char* name)
 //    }
 //}
 
-// 将多字节字符串转换为 UTF-8
-char* ConvertToUTF8(const char* input) 
-{
-    // Step 1: 多字节（GBK）→ 宽字符（UTF-16）
-    int wc_len = MultiByteToWideChar(CP_ACP, 0, input, -1, NULL, 0);
-    wchar_t* wstr = (wchar_t*)malloc(wc_len * sizeof(wchar_t));
-    MultiByteToWideChar(CP_ACP, 0, input, -1, wstr, wc_len);
 
-    // Step 2: 宽字符（UTF-16）→ UTF-8
-    int utf8_len = WideCharToMultiByte(CP_UTF8, 0, wstr, -1, NULL, 0, NULL, NULL);
-    char* utf8_str = (char*)malloc(utf8_len);
-    WideCharToMultiByte(CP_UTF8, 0, wstr, -1, utf8_str, utf8_len, NULL, NULL);
-
-    free(wstr);
-    return utf8_str;
-}
 
 int main() 
 {
     // 设置终端输出为 UTF-8
-    SetConsoleOutputCP(CP_UTF8);
+    //SetConsoleOutputCP(CP_UTF8);
 
     char keywords[STR] = { 0 };
     char region[STR] = { 0 };
 
-    printf("Please enter your city/county:");
+    printf("请输入所属市(县):");
     fgets(region, sizeof(region), stdin);
     region[strcspn(region, "\n")] = '\0'; // 去除末尾换行符
-    printf("Please enter the location name:");
+    printf("请输入地点名字:");
     fgets(keywords, sizeof(keywords), stdin);
     keywords[strcspn(keywords, "\n")] = '\0'; // 去除末尾换行符
 
@@ -240,8 +278,7 @@ int main()
     snprintf(url, SIZE, "https://restapi.amap.com/v5/place/text?keywords=%s&region=%s&key=%s",
         utf8_keywords, utf8_region, KEY);
 
-    printf("Request URL: %s\n", url);
-
+    //printf("Request URL: %s\n", url);
 	free(utf8_region);
 	free(utf8_keywords);
 
@@ -284,31 +321,28 @@ int main()
        PrintLinkedList(poi_list);
        //选择POI name
 	   char poi_name[STR] = { 0 };
-	   printf("Please enter the POI name you want to add:");
+	   printf("请输入你想添加的地点:");
 	   fgets(poi_name, sizeof(poi_name), stdin);
 	   poi_name[strcspn(poi_name, "\n")] = '\0'; // 去除末尾换行符
-       // 转换为 UTF-8
-       char* utf8_name = ConvertToUTF8(poi_name);
        //查找POI
-       POIInfo* current = FindPOI(poi_list, utf8_name);
-	   free(utf8_name);
+       POIInfo* current = FindPOI(poi_list, poi_name);
        if (current==NULL)
 	   {
-		   printf("POI not found!\n");
+		   printf("找不到该地点!\n");
 		   FreeLinkedList(&poi_list);// 安全释放并置空
 		   json_object_put(json);
 		   return 1;
 	   }
-	   printf("POI found!\n");
+	   printf("查找到该地点!\n");
 	   //打印POI
        printf("[POI]\n"
-           "Name: %s\n"
-           "Address: %s\n"
-           "Location: %s\n"
-           "Province: %s\n"
-           "City: %s\n"
-           "District: %s\n"
-           "Type: %s\n\n"
+           "名称: %s\n"
+           "详细地址: %s\n"
+           "经纬度: %s\n"
+           "所属省份: %s\n"
+           "所属城市: %s\n"
+           "所属区县: %s\n"
+           "所属类型: %s\n\n"
            , current->name, current->address, current->location,
            current->province, current->city, current->district, current->type);
        FreeLinkedList(&poi_list);// 安全释放并置空

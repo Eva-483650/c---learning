@@ -1,0 +1,3 @@
+﻿  Management.cpp
+D:\code\package\easyx_test\easyx_test\Management.cpp(39,8): warning C4477: “scanf”: 格式字符串“%d”需要类型“int *”的参数，但可变参数 1 拥有了类型“int”
+  easyx_test.vcxproj -> D:\code\package\easyx_test\x64\Debug\easyx_test.exe

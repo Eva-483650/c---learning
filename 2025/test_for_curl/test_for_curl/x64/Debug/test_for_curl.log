@@ -1,5 +1,5 @@
 ﻿  main.cpp
-D:\code\c---learning\2025\test_for_curl\test_for_curl\main.cpp(77,13): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+D:\code\c---learning\2025\test_for_curl\test_for_curl\main.cpp(128,13): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
   test_for_curl.vcxproj -> D:\code\c---learning\2025\test_for_curl\x64\Debug\test_for_curl.exe
   'pwsh.exe' 不是内部或外部命令，也不是可运行的程序
   或批处理文件。

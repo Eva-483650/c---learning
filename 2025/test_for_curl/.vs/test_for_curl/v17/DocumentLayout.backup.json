@@ -30,9 +30,9 @@
               "Title": "main.cpp",
               "DocumentMoniker": "D:\\code\\c---learning\\2025\\test_for_curl\\test_for_curl\\main.cpp",
               "RelativeDocumentMoniker": "test_for_curl\\main.cpp",
-              "ToolTip": "D:\\code\\c---learning\\2025\\test_for_curl\\test_for_curl\\main.cpp",
-              "RelativeToolTip": "test_for_curl\\main.cpp",
-              "ViewState": "AgIAADIAAAAAAAAAAAAmwEgAAAABAAAAAAAAAA==",
+              "ToolTip": "D:\\code\\c---learning\\2025\\test_for_curl\\test_for_curl\\main.cpp*",
+              "RelativeToolTip": "test_for_curl\\main.cpp*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-03-20T06:06:15.714Z",
               "EditorCaption": ""
@@ -50,10 +50,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             }
           ]
         }
